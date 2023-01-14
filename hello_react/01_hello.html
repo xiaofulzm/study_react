@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react_hello</title>
+</head>
+<body>
+    <div id="test" ></div>
+
+    <!-- 引入react 核心库 -->
+    <script type="text/javaScript" src="./React-js/react.development.js" ></script>
+    <!-- 引入react-dom -->
+    <script type="text/javaScript" src="./React-js/react-dom.development.js" ></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script type="text/javaScript" src="./React-js//babel.min.js" ></script>
+
+    <!-- type 一定是 text/babel -->
+    <script type="text/babel" >
+        console.log(React)
+        let data = '下否'
+        const VDOM = (
+            <h1>hello React<span>小夫</span>{data}</h1>
+        )
+        console.log(VDOM);
+        ReactDOM.render(VDOM,document.getElementById('test'))
+    </script>
+    
+</body>
+</html>
