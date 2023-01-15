@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react---state</title>
+</head>
+<body>
+    <div id="test" ></div>
+
+    <!-- 引入react 核心库 -->
+    <script type="text/javaScript" src="./React-js/react.development.js" ></script>
+    <!-- 引入react-dom -->
+    <script type="text/javaScript" src="./React-js/react-dom.development.js" ></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script type="text/javaScript" src="./React-js//babel.min.js" ></script>
+
+    <!-- type 一定是 text/babel -->
+    <script type="text/babel" >
+  
+       // 创建类组件
+       class ClassComponent extends React.Component {
+        constructor(props){
+            super(props);
+            this.state = {istxt:props.txt};
+            this.handleClick = this.handleClick.bind(this);
+        }
+        render() {
+            console.log(this);
+            return <h1>今天下雪啦, {this.state.istxt?'有点冷':''}</h1>;
+        }
+        handleClick(){
+            this.state.istxt = !this.state.istxt;
+        }
+        
+       }
+
+       // 渲染组件
+       ReactDOM.render(<ClassComponent onClick={handleClick} txt={true} />,document.getElementById('test'));
+
+    </script>
+    
+</body>
+</html>
