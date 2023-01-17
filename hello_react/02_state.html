@@ -21,23 +21,31 @@
   
        // 创建类组件
        class ClassComponent extends React.Component {
+        // 构造器调用几次? ____1次
         constructor(props){
             super(props);
             this.state = {istxt:props.txt};
+            // 解决handleClick中this指向问题
             this.handleClick = this.handleClick.bind(this);
         }
+        // rander调用几次? _____ 1+n次, 1是初始化的那次  n是状态更新的次数
         render() {
-            console.log(this);
-            return <h1>今天下雪啦, {this.state.istxt?'有点冷':''}</h1>;
+            // console.log(this);
+            return <h1 onClick={this.handleClick} >今天下雪啦, {this.state.istxt?'有点冷':''}</h1>;
         }
+        // handleClick 调用几次? ___  点击几次调几次
         handleClick(){
-            this.state.istxt = !this.state.istxt;
+            // console.log(this);
+            // 由于handleClick是作为onClick的回调,所以不是通过实例调用的, 是直接调用的
+            // 类中的方法默认开启了严格模式, 所以handleClick中的this为undefined
+
+            // 状态(state)不可直接更改, 需要通过setState修改,且更新是合并,不是替换
+            this.setState({istxt:!this.state.istxt});
         }
         
        }
-
        // 渲染组件
-       ReactDOM.render(<ClassComponent onClick={handleClick} txt={true} />,document.getElementById('test'));
+       ReactDOM.render(<ClassComponent  />,document.getElementById('test'));
 
     </script>
     
