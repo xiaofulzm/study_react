@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react---ref</title>
+</head>
+<body>
+    <div id="test" ></div>
+
+    <!-- 引入react 核心库 -->
+    <script type="text/javaScript" src="./React-js/react.development.js" ></script>
+    <!-- 引入react-dom -->
+    <script type="text/javaScript" src="./React-js/react-dom.development.js" ></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script type="text/javaScript" src="./React-js/babel.min.js" ></script>
+    <!-- 引入props-types  用于对组件标签属性的限制  -->
+    <script type="text/javaScript" src="./React-js/prop-types.js" ></script>
+
+    <!-- type 一定是 text/babel -->
+    <script type="text/babel" >
+  
+       // 创建类组件
+       class Demo extends React.Component {
+        handleSubmit = (e)=>{
+            e.preventDefault(); // 阻止默认表单 提交
+            const {name,pwd} = this.state;
+            console.log(this);
+            alert(`你输入的用户名是${name},你输入的密码是${pwd}`)
+        }
+
+        saveName = (e)=>{
+            e.persist();
+            console.log(e);
+            this.setState({name:e.target.value})
+        }
+
+        savePwd= (e) =>{
+            e.persist();
+            this.setState({pwd:e.target.value})
+        }
+        state={
+            name:'',
+            pwd:''
+        }
+        render() {
+            return (
+                <form onSubmit={this.handleSubmit} >
+                    用户名: <input onChange={this.saveName} name="name" type="text" />    
+                    密码: <input onChange={this.savePwd}  ref={c=>this.pwd =c}  name="pwd" type="password" />    
+                    <button>登录</button>    
+                </form>
+            )
+        }
+       }
+       // 渲染组件
+       ReactDOM.render(<Demo/>,document.getElementById('test'));
+
+    </script>
+    
+</body>
+</html>

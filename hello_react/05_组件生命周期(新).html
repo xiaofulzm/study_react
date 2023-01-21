@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react---组件生命周期</title>
+</head>
+<body>
+    <div id="test" ></div>
+    <!-- 引入react 核心库 -->
+    <script type="text/javaScript" src="./React-js/17.0/react.development17.0.js" ></script>
+    <!-- 引入react-dom -->
+    <script type="text/javaScript" src="./React-js/17.0/react-dom.development17.0.js" ></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script type="text/javaScript" src="./React-js/babel.min.js" ></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/6.1.19/browser.js"></script> -->
+    <!-- 引入props-types  用于对组件标签属性的限制  -->
+    <script type="text/javaScript" src="./React-js/17.0/prop-types.js" ></script>
+
+    <!-- type 一定是 text/babel -->
+    <script type="text/babel" >
+        // 创建类组件
+       class Life extends React.Component {
+           //  构造器
+           constructor(props){
+               console.log("constructor");
+               super(props)
+               this.state = {count:0}
+           }
+           
+           add = ()=>{
+               let {count} = this.state;
+               this.setState({count:count+1})
+           }
+           // 强制更新
+           force = () =>{
+                this.forceUpdate();
+           }
+           death  = ()=>{
+                 // 卸载组件
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+           // 组件将要挂载的钩子
+           componentWillMount(){
+                console.log("componentWillMount");
+           }
+            // 组件挂载完成
+            componentDidMount(){
+                console.log("componentDidMount");
+            }
+            // 组件销毁之前
+            componentWillUnmount (){
+                clearInterval('componentWillUnmount---卸载');
+            }
+            // 控制组件更新的" 阀门 "
+            shouldComponentUpdate(){
+                console.log("shouldComponentUpdate");
+                return true;
+            }
+            // 组件将要更新的钩子
+            componentWillUpdate(){
+                console.log("componentWillUpdate");
+            }
+            // 组件更新完毕的钩子
+            componentDidUpdate(){
+                console.log("componentDidUpdate");
+            }
+           render (){
+               console.log("render");
+               return (
+                   <div>
+                        <h2>当前求和为: {this.state.count}</h2>
+                        <button onClick={this.add} >点+1</button>
+                        <button onClick={this.force} >强制更新</button>
+                        <button onClick={this.death} >卸载</button>
+                    </div>
+               )
+           }
+       }
+       // 父组件A
+       class A extends React.Component{
+
+           // 初始化状态
+           state = {carName:'飞机'}
+           changeCar = ()=>{
+               this.setState({carName:'飞船'})
+           }
+
+           render(){
+               return (
+                   <div>
+                        <div>我是A</div>
+                        <button  onClick={this.changeCar} >换车</button>
+                        <B carName={this.state.carName} />
+                   </div>
+               )
+           }
+       }
+       // 父组件B
+       class B extends React.Component{
+            //  组件将要接受新的props钩子
+            componentWillReceiveProps(){
+                console.log("componentWillReceiveProps");
+            }
+
+           render(){
+               return (
+                   <div>
+                        <div>我是B, {this.props.carName}</div>
+                   </div>
+               )
+           }
+       }
+       
+       
+       // 渲染组件
+       ReactDOM.render(<Life />,document.getElementById('test'));
+
+    </script>
+    
+</body>
+</html>

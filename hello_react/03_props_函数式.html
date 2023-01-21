@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react---props</title>
+</head>
+<body>
+    <div id="test" ></div>
+
+    <!-- 引入react 核心库 -->
+    <script type="text/javaScript" src="./React-js/react.development.js" ></script>
+    <!-- 引入react-dom -->
+    <script type="text/javaScript" src="./React-js/react-dom.development.js" ></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script type="text/javaScript" src="./React-js/babel.min.js" ></script>
+    <!-- 引入props-types  用于对组件标签属性的限制  -->
+    <script type="text/javaScript" src="./React-js/prop-types.js" ></script>
+
+    <!-- type 一定是 text/babel -->
+    <script type="text/babel" >
+  
+       function Person(props) {
+        console.log(props);
+        const {name,age,sex} = props;
+
+        return (
+                <ul>
+                    <li>姓名: {name}</li>
+                    <li>性别: {sex}</li>
+                    <li>年龄: {age}</li>
+                </ul>
+            )
+       }
+         // 对标签属性进行类型, 必要性的限制
+        Person.propTypes = {
+           name: PropTypes.string.isRequired,
+           sex: PropTypes.string,
+           speak: PropTypes.func
+       }
+       // 指定默认标签属性值
+       Person.defaultProps = {
+           sex:'不男不女',
+           age:17
+       }
+       const p = {name:'小夫', age:18}
+       // 渲染组件
+       ReactDOM.render(<Person  {...p}  />,document.getElementById('test'));
+
+    </script>
+    
+</body>
+</html>
