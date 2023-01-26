@@ -24,7 +24,7 @@
        class Life extends React.Component {
            //  构造器
            constructor(props){
-               console.log("constructor");
+                console.log("constructor");
                super(props)
                this.state = {count:0}
            }
@@ -41,10 +41,20 @@
                  // 卸载组件
                 ReactDOM.unmountComponentAtNode(document.getElementById('test'))
             }
-           // 组件将要挂载的钩子
-           componentWillMount(){
-                console.log("componentWillMount");
-           }
+            // 若state的值在任何时候都取决于props , 那么可以使用 getDerivedStateFromProps
+            static getDerivedStateFromProps(props){
+                console.log("getDerivedStateFromProps",props);
+                return null
+            }
+            // 在跟新之前获取快照
+            getSnapshotBeforeUpdate(){
+                console.log('getSnapshotBeforeUpdate');
+                return null
+            }
+        //    // 组件将要挂载的钩子
+        //    UNSAFE_componentWillMount(){
+        //         console.log("componentWillMount");
+        //    }
             // 组件挂载完成
             componentDidMount(){
                 console.log("componentDidMount");
@@ -59,9 +69,9 @@
                 return true;
             }
             // 组件将要更新的钩子
-            componentWillUpdate(){
-                console.log("componentWillUpdate");
-            }
+            // UNSAFE_componentWillUpdate(){
+            //     console.log("componentWillUpdate");
+            // }
             // 组件更新完毕的钩子
             componentDidUpdate(){
                 console.log("componentDidUpdate");
@@ -78,41 +88,6 @@
                )
            }
        }
-       // 父组件A
-       class A extends React.Component{
-
-           // 初始化状态
-           state = {carName:'飞机'}
-           changeCar = ()=>{
-               this.setState({carName:'飞船'})
-           }
-
-           render(){
-               return (
-                   <div>
-                        <div>我是A</div>
-                        <button  onClick={this.changeCar} >换车</button>
-                        <B carName={this.state.carName} />
-                   </div>
-               )
-           }
-       }
-       // 父组件B
-       class B extends React.Component{
-            //  组件将要接受新的props钩子
-            componentWillReceiveProps(){
-                console.log("componentWillReceiveProps");
-            }
-
-           render(){
-               return (
-                   <div>
-                        <div>我是B, {this.props.carName}</div>
-                   </div>
-               )
-           }
-       }
-       
        
        // 渲染组件
        ReactDOM.render(<Life />,document.getElementById('test'));
