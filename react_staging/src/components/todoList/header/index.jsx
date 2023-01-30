@@ -2,8 +2,12 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {nanoid} from "nanoid";
+import PubSub from 'pubsub-js';
+
 
  import "./index.css";
+
+console.log(PubSub);
 
 class Header extends Component {
 
@@ -22,6 +26,13 @@ class Header extends Component {
             name:e.target.value,
             done:false
         });
+
+        PubSub.publish('xiaofu',{
+            id:nanoid(),
+            name:e.target.value,
+            done:false
+        })
+
         e.target.value = '';
     }
     render() {

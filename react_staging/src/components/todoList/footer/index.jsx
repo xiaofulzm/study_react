@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import PubSub from 'pubsub-js';
 
 import "./index.css";
 
@@ -15,6 +16,15 @@ class Footer extends Component {
             this.props.clearDone();
         }
         
+    }
+    componentDidMount(){
+        this.token = PubSub.subscribe('xiaofu',(msg,data)=>{
+            console.log(msg,data);
+        })
+    }
+    componentWillUnmount(){
+        console.log(this.token);
+        PubSub.unsubscribe(this.token);
     }
 
     render() {

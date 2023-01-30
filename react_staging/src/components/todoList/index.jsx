@@ -6,11 +6,10 @@ import List from './list';
 import Footer from './footer';
 import "./index.css";
 
+// todos案例
+
 class TodoList extends Component {
     // 状态在哪里, 操作状态的方法就在那里
-
-
-  
 
     // 初始化数据
     state = {
