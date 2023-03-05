@@ -6,7 +6,7 @@ import News from "../news"
 
 export default class Home extends Component {
   render() {
-      console.log(this.props);
+    //   console.log(this.props);
     return (
       <div>
         我是home的内容
