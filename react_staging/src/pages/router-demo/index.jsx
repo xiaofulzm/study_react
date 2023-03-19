@@ -9,7 +9,7 @@ import "./index.css"
 class RouterDemo extends Component {
     render() {
         return (
-            <div>
+            <div  >
                 <h1 className='title' >React Router Demo</h1>
                 <div className='title' >
                     {/* <NavLink activeClassName="red"  to="/home" style={{marginRight:'20px'}} >首页</NavLink> */}

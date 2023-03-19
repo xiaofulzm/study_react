@@ -26,6 +26,10 @@ class TodoList extends Component {
         const {todos} = this.state;
         let newTodos = [data,...todos];
         this.setState({todos:newTodos}) 
+        // 函数式state
+        this.setState((state,prop)=>{
+            return {todos:newTodos}
+        })
 
     }
 

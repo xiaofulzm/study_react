@@ -6,9 +6,8 @@ import {
     createIncrementAction,
     createDecrementAction,
     createIncrementAsyncAction
-} from "../../../../redux/count_action.js";
+} from "../../../../redux/actions/count_action.js";
 
-console.log(store);
 export default class Count extends Component {
 
     state = {count:0}

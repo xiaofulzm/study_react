@@ -7,7 +7,7 @@ import {
     createDecrementAction,
     createIncrementAsyncAction,
     createIncrementAction 
-} from '../redux/count_action';
+} from '../redux/actions/count_action';
 
 
 // 引入connect 用于链接ui主机开年与redux
@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 
 // a函数的返回值作为状态传递给UI组件
 function mapStateToPreps(state){
-    return {count:state};
+    return {count:state.he};
 }
 
 function mapDispatchToProps(dispatch){

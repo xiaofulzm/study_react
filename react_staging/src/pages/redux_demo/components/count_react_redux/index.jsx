@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
-export default class Count extends Component {
+import { 
+    createDecrementAction,
+    createIncrementAsyncAction,
+    createIncrementAction 
+} from '../../../../redux/actions/count_action';
+import { connect } from 'react-redux';
+class Count extends Component {
 
     state = {count:0}
 
@@ -33,10 +39,9 @@ export default class Count extends Component {
 
     }
   render() {
-      console.log(this.props);
     return (
       <div>
-        <h1>当前求和为:{this.props.count}</h1>
+        <h1>当前求和为:{this.props.count}.人数{this.props.ren.length}</h1>
         <select ref={c=>this.selecNumber = c} >
             <option value="1" >1</option>
             <option value="2" >2</option>
@@ -50,3 +55,13 @@ export default class Count extends Component {
     )
   }
 }
+
+
+export default connect(
+    state => ({count:state.he,ren:state.rens}),
+    {
+        jia:createIncrementAction,
+        jiaAsync:createIncrementAsyncAction,
+        jian:createDecrementAction
+    }
+)(Count)
